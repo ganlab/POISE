@@ -4,7 +4,7 @@
 
 
 ## :computer:Getting Started
-### Direct Access
+### Access Address
 https://bic.njau.edu.cn/poise.html
 ### Local Deployment
 The web deployment was tested on IIS, Apache, and nginx, while browser testing was conducted on Chrome, Edge, and Safari.
