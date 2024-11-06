@@ -39,7 +39,7 @@ python data_process/prediction/prediction_result.py
 ```
 The results are in ScaleCalculator/with_objectanchor/log/sem_seg/2023_seed/visual. 
 
-#### Estimation the scale factor.
+#### Estimation real-scale.
 
 This process may involve converting .ply files to .obj files.
 ```shell
@@ -49,6 +49,12 @@ Then,
 ```shell
 python data_process/prediction/txt2scale.py
 ```
+
+#### background segmentation.
+```shell
+python data_process/prediction/seg_glb.py
+```
+
 We have provided a sample for you to test in ScaleCalculator/with_objectanchor/test.
 
 ## :book:Citation
