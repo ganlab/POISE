@@ -1,6 +1,6 @@
 # POISE
 
-POISE (Plant Online Interactive Stereo model development Environment), comprises three components: an online platform for 3D visualization and interactive investigation of plant architecture and organ morphology; OSTRA for modelling plants in the original growth state and segmenting organs ( [OSTRA](https://github.com/ganlab/OSTRA) is available independently ); ScaleCalculator for recovering physical scales of 3D models.
+POISE (Plant Online Interactive Stereo model development Environment), comprises three components: an online platform for 3D visualization and interactive investigation of plant architecture and organ morphology; [OSTRA](https://github.com/ganlab/OSTRA) ( available independently ) for modelling plants in the original growth state and segmenting organs; ScaleCalculator for recovering physical scales of 3D models.
 
 ## :computer:Getting Started
 ### Online database
@@ -22,14 +22,14 @@ Our online measurement feature is developed based on [three.js](https://github.c
 [![Watch the video](https://img.youtube.com/vi/mZH4Jgh5X0I/hqdefault.jpg)](https://youtu.be/mZH4Jgh5X0I)
 
 ## ScaleCalculator
-### with depth
+### Option 1: depth image
 You can run the script to perform depth-based scale estimation. 
 ```shell
 python ScaleCalculator/with_depth/main.py 
 ```
 We have provided a sample for you to test in ScaleCalculator/with_depth/sample.
 
-### with object anchor
+### Option 2: object anchor 
 You can run the script to perform object anchor-based scale estimation. 
 
 <details>
@@ -80,12 +80,12 @@ Authors:
 
 Jiexiong Xu
 xu_jx@stu.njau.edu.cn
-work: Website framework development, measurement tools, and ScaleCalculator with depth image module.
+work: Website framework development, measurement tools, and ScaleCalculator with depth image.
 
 Jiaqi Deng
 2023122005@stu.njau.edu.cn
-work: Bug fixes and website optimization.
+work: Website optimization.
 
 Zhiyan Tang
 2022119002@stu.njau.edu.cn
-work: ScaleCalculator with object anchor module.
+work: ScaleCalculator with object anchor.
