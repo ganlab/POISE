@@ -73,14 +73,14 @@ Website is based on [three.js](https://github.com/mrdoob/three.js) and [3DView.M
 
 Authors:
 
-Jiexiong Xu 
-xu_jx@stu.njau.edu.cn 
+Jiexiong Xu
+xu_jx@stu.njau.edu.cn
 work: Website framework development, measurement tools, and ScaleCalculator with depth image module.
 
 Jiaqi Deng
 2023122005@stu.njau.edu.cn
 work: Bug fixes and website optimization.
 
-Zhiyan Tang 
+Zhiyan Tang
 2022119002@stu.njau.edu.cn
 work: ScaleCalculator with object anchor module.
