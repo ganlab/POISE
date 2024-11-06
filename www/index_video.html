@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POISE</title>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .centered-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+
+  .icon {
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .text {
+    margin-bottom: 24px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+  }
+
+  video {
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 24px;
+  }
+</style>
+</head>
+<body>
+
+<div class="centered-content">
+  <div class="image-container">
+    <img class="icon" src="images/favicon.ico" alt="Icon">
+  </div>
+  <video controls>
+    <source src="data/POISE.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div>
+    <button class='button' id="enter">Enter</button>
+  </div>
+</div>
+
+<script>
+  var button_enter = document.getElementById("enter");
+  button_enter.addEventListener("click", function() {
+    window.location.href = "index_2.html?id=" + "2024";
+  });
+</script>
+
+</body>
+</html>

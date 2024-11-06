@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>three.js webgl - STL</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="./easyui/demo.css">
+    <link rel="stylesheet" type="text/css" href="./easyui/easyui.css">
+    <style>
+        body {
+            color: #000;
+            font-family:Monospace;
+            font-size:13px;
+            text-align:center;
+            background-color: #fff;
+            margin: 0px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        #menu {
+            position: relative;
+            color:#000;
+            width: 100%;
+            padding: 5px;
+
+        }
+
+        #info {
+            position: absolute;
+            width: 500px;
+            right: 0px;
+            top: 40px;
+            color:#000;
+            padding: 5px;
+            opacity: 0.9;
+        }
+
+        #container {
+            width: 100%;
+            height: 800px;
+        }
+
+        .measurement_info {
+            border: 1px solid #aaa;
+            padding: 5px;
+            margin:5px;
+        }
+
+        .measurement_description {
+            overflow: auto;
+            width: 450px;
+            padding: 2px;
+        }
+
+        #title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+            margin-bottom: 0px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            font-family: verdana,helvetica,arial,sans-serif;
+            float:left;
+        }
+    </style>
+</head>
+
+
+<body>
+<!--<div id="header"></div>-->
+<!--<h2 id="title">3D rice model database</h2>-->
+<!--修改-->
+<script>
+    var urlParams = new URLSearchParams(window.location.search);
+    console.log(urlParams)
+    const buttonId = urlParams.get('id');
+	window.sharedVariable = buttonId;
+    console.log(buttonId);
+    // console.log(buttonId); // 输出一级页面按钮的id
+    function generateLink() {
+        var link = document.querySelector('#menu a'); // 获取超链接
+        console.log(buttonId);
+        link.href = 'index_2.html?id=' + window.sharedVariable; // 修改超链接的 href 属性
+    }
+</script>
+<div id="menu">
+    <a href="" onclick="generateLink()">
+            <img src="./images/icon.png" style="width: 50px; height: 30px; float: left;">
+        </a>
+        <h2 id="title">3D rice model database</h2>
+    <button id="distancebutton" class="easyui-linkbutton l-btn l-btn-small">Measure Distance</button>
+    <!-- <button id="infobutton" class="easyui-linkbutton l-btn l-btn-small">Point Info</button> -->
+    <button id="clearbutton" class="easyui-linkbutton l-btn l-btn-small">Clear</button>
+    <!-- <button id="downloadbutton" class="easyui-linkbutton l-btn l-btn-small" onclick="download()">DownLoad Model</button> -->
+</div>
+<div id="info"></div>
+<div id="container"></div>
+<!-- Import maps polyfill -->
+<!-- Remove this when import maps will be widely supported -->
+<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+<script type="importmap">
+			{
+				"imports": {
+					"three": "./js/dependencies/three.module.js"
+				}
+			}
+</script>
+<script src="js/dependencies/ui.js"></script>
+
+<script type="module">
+    
+    let parameter = getURLParams();
+    // alert(parameter);
+
+    import * as THREE from 'three';
+    import {
+        PerspectiveCamera,
+        WebGLRenderer,
+        sRGBEncoding,
+        HemisphereLight,
+        LoadingManager
+    } from 'three';
+    import {OrbitControls} from './js/dependencies/OrbitControls.js';
+    import {TrackballControls} from './js/dependencies/TrackballControls.js';
+    import {STLLoader} from './js/dependencies/STLLoader.js';
+    import {PLYLoader} from './js/dependencies/PLYLoader.js';
+    //add by xujx
+    import {GLTFLoader} from './js/dependencies/GLTFLoader.js'; 
+    import {DRACOLoader} from './js/dependencies/DRACOLoader.js'; 
+
+    import {View3D} from './js/3DView/3DView.Measurements.js';
+    import {MeasurementInfo} from './js/3DView/measurements/Measurement.Info.js';
+    import {MeasurementDistance} from './js/3DView/measurements/Measurement.Distance.js';
+    
+
+    let container, stats, camera, scene, renderer, controls;
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    camera = new PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 15);
+    camera.position.set(3, 0.15, 3);
+    // renderer
+    renderer = new WebGLRenderer({antialias: true});
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.outputEncoding = sRGBEncoding;
+    renderer.shadowMap.enabled = true;
+    container.appendChild(renderer.domElement);
+
+    //you can use the type of controls you want TrackballControls,OrbitControls...
+    const control = new OrbitControls(camera, renderer.domElement);
+    control.enableDamping = true;
+    control.dampingFactor = 0.25;
+    control.enableZoom = true;
+
+    // const control = new TrackballControls( camera, renderer.domElement );
+    // control.rotateSpeed = 10.0;
+    // control.zoomSpeed = 3.0;
+    // control.panSpeed = 0.8;
+    // control.noZoom = false;
+    // control.noPan = false;
+    // control.staticMoving = true;
+    // control.dynamicDampingFactor = 0.3;
+    // control.keys = [ 65, 83, 68 ];
+
+    var view = new View3D(document.getElementById( 'container' ), renderer, control,camera);
+
+    var loader = new GLTFLoader(new LoadingManager());
+    // Optional: Provide a DRACOLoader instance to decode compressed mesh data
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath( './js/dependencies/draco/' );
+    loader.setDRACOLoader( dracoLoader );
+    // 加载地图模型
+    loader.load(parameter, function(gltf){
+        //将模型添加至场景
+
+
+        var mesh = gltf.scene.children[ 0 ];
+        mesh.geometry.computeBoundingBox();
+        var x = -(mesh.geometry.boundingBox.max.x - mesh.geometry.boundingBox.min.x) / 2;
+        var y = -(mesh.geometry.boundingBox.max.y - mesh.geometry.boundingBox.min.y) / 2;
+        var z = -(mesh.geometry.boundingBox.max.z - mesh.geometry.boundingBox.min.z) / 2;
+        mesh.position.set(x,y,z)
+        // view.addGeometry( mesh.geometry );
+        view.scene.add(mesh)
+        //设置模型位置
+
+    })
+
+
+    //Lights
+    view.scene.add(new HemisphereLight(0x443333, 0x111122));
+    addShadowedLight(1, 1, 1, 0xffffff, 1.35);
+    addShadowedLight(0.5, 1, -1, 0xffaa00, 1);
+
+    var element=document.getElementById("infobutton");
+    var listener=element.addEventListener('click',function(event){
+        view.addMeasurement(new MeasurementInfo());
+    });
+
+    var element=document.getElementById("clearbutton");
+    var listener=element.addEventListener('click',function(event){
+        view.clearMeasurements();
+    });
+
+    var element=document.getElementById("distancebutton");
+    var listener=element.addEventListener('click',function(event){
+        view.addMeasurement(new MeasurementDistance());
+    });
+
+    //on measurement added
+    view.addEventListener( 'measurementAdded', function (event) {
+        var measurement = event.object;
+        if (measurement) {
+            var infoDiv = document.getElementById( 'info' );
+            var measurementDiv = document.createElement('div');
+            measurementDiv.id = 'measurement_' + measurement.id;
+            measurementDiv.className = 'measurement_info';
+            infoDiv.appendChild(measurementDiv);
+
+            var descriptionDiv = document.createElement('div');
+            descriptionDiv.id = 'description_' + measurement.id;
+            descriptionDiv.className = 'measurement_description';
+            descriptionDiv.innerHTML = measurement.getType() + " = " + measurement.getValue() + " " + JSON.stringify(measurement.getInfo());
+            measurementDiv.appendChild(descriptionDiv);
+
+            var removeButton = document.createElement('button');
+            removeButton.className = 'measurement_remove';
+            removeButton.innerHTML = 'Remove';
+            removeButton.onclick = function() {
+                view.removeMeasurement(measurement);
+            }
+            measurementDiv.appendChild(removeButton);
+        }
+    } );
+
+    //on measurement changed
+    view.addEventListener( 'measurementChanged', function (event) {
+        var measurement = event.object;
+        if (measurement) {
+            var descriptionDiv = document.getElementById('description_' + measurement.id);
+            if (descriptionDiv)
+                descriptionDiv.innerHTML = measurement.getType() + " = " + measurement.getValue() + " " + JSON.stringify(measurement.getInfo());
+        }
+
+    } );
+
+    //on measurement removed
+    view.addEventListener( 'measurementRemoved', function (event) {
+        var measurement = event.object;
+        if (measurement) {
+            var measurementDiv = document.getElementById('measurement_' + measurement.id);
+            measurementDiv.parentNode.removeChild(measurementDiv);
+        }
+
+    } );
+
+    function addShadowedLight(x, y, z, color, intensity) {
+        const directionalLight = new THREE.DirectionalLight(color, intensity);
+        directionalLight.position.set(x, y, z);
+        view.scene.add(directionalLight);
+        directionalLight.castShadow = true;
+        const d = 1;
+        directionalLight.shadow.camera.left = -d;
+        directionalLight.shadow.camera.right = d;
+        directionalLight.shadow.camera.top = d;
+        directionalLight.shadow.camera.bottom = -d;
+        directionalLight.shadow.camera.near = 1;
+        directionalLight.shadow.camera.far = 4;
+        directionalLight.shadow.bias = -0.002;
+    }
+
+    function getURLParams() {
+        let searchURL = location.search; // 获取到URL中的参数串
+        searchURL = searchURL.split('&')[0];   //修改
+        searchURL = searchURL.replace( '?', '' )
+        return searchURL;
+    }
+
+</script>
+
+</body>
+</html>
