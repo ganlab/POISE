@@ -10,13 +10,12 @@ from sklearn.neighbors import KernelDensity
 import os
 
 
-# 读取点云数据文件
 def read_point_cloud(file_path):
     point_cloud = []
     with open(file_path, 'r') as file:
         for line in file:
             values = line.strip().split()
-            if len(values) >= 7:  # 至少包含三维坐标和RGB信息
+            if len(values) >= 7:  
                 point_cloud.append(list(map(float, values[:6])))
     return np.array(point_cloud)
 
@@ -103,7 +102,6 @@ def scale_calculate(path):
     points3d_list = Ctr.read_points3D_txt(Ctr.txt_path + "points3D.txt")
     depth_images_list = Ctr.read_depth_images(Ctr.depth_path)
     point3d_depth_list = Ctr.calculate_depth(depth_images_list, images_list)
-    # point3d_depth_list = point3d_depth_list[1] # 1 depth usage
     point3d_depth_list = Ctr.add_xyzerrorinfo_to_point3d_depth_list(point3d_depth_list, points3d_list)
 
     for point3d_depth in point3d_depth_list:
@@ -175,11 +173,11 @@ def scale_calculate(path):
         label='KDE',
     )
     plt.plot(x_range, x_prob, color='gray')
-    plt.vlines(x=point_x, ymin=0, ymax=point_y, color='k', linestyle='--', alpha=0.05)  # 分布中心
+    plt.vlines(x=point_x, ymin=0, ymax=point_y, color='k', linestyle='--', alpha=0.05)
     plt.ylim(0, r[0].max() + 0.011)
     plt.legend(loc='upper right')
     plt.title('histogram and kde')
-    plt.scatter(point_x, point_y, s=15, c='r')  # stroke, colour
+    plt.scatter(point_x, point_y, s=15, c='r')
     text = 'Scale:' + str(point_x)
     print(text)
     plt.text(point_x, point_y, text, ha='center', va='bottom', fontsize=10.5)
