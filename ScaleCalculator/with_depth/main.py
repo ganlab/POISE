@@ -192,6 +192,6 @@ def scale_calculate(path):
 
 
 if __name__ == '__main__':
-    path = r'/media/xujx/MyPassport1/sample/'
+    path = r'your/path/'
     scale = scale_calculate(path)
     print(scale)
