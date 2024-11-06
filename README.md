@@ -64,8 +64,23 @@ Please considering cite our paper if you find this work useful!
 }
 ```
 
+## License
+Free for non-profit research purposes. Please contact authors otherwise. The program itself may not be modified in any way and no redistribution is allowed.
+No condition is made or to be implied, nor is any warranty given or to be implied, as to the accuracy of PROPA, or that it will be suitable for any particular purpose or for use under any specific conditions, or that the content or use of PROPA will not constitute or result in infringement of third-party rights.
+
 ## :clap: Acknowledgements
-[three.js](https://github.com/mrdoob/three.js)
-[Colmap](https://github.com/colmap/colmap)
-[Open3D](https://github.com/isl-org/Open3D).
-[3DView.Measurements](https://github.com/AwesomeTeamOne/3DView.Measurements)
+Website is based on [three.js](https://github.com/mrdoob/three.js) and [3DView.Measurements](https://github.com/AwesomeTeamOne/3DView.Measurements). ScaleCalculator is based on [Open3D](https://github.com/isl-org/Open3D) and [pointnet++](https://github.com/yanx27/Pointnet_Pointnet2_pytorch). The software is developed by following author(s) and supervised by Prof. Xiangchao Gan(gan@njau.edu.cn).
+
+Authors:
+
+Jiexiong Xu 
+xu_jx@stu.njau.edu.cn 
+work: Website framework development, measurement tools, and ScaleCalculator with depth image module.
+
+Jiaqi Deng
+2023122005@stu.njau.edu.cn
+work: Bug fixes and website optimization.
+
+Zhiyan Tang 
+2022119002@stu.njau.edu.cn
+work: ScaleCalculator with object anchor module.
