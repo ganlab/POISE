@@ -1,0 +1,9 @@
+2023-11-25 15:41:54,513 - Model - INFO - PARAMETER ...
+2023-11-25 15:41:54,513 - Model - INFO - Namespace(model='pointnet_sem_seg', batch_size=16, epoch=32, learning_rate=0.001, gpu='0', optimizer='Adam', log_dir='2023_seed', decay_rate=0.0001, npoint=4096, step_size=10, lr_decay=0.7, test_area=5)
+2023-11-25 15:45:55,905 - Model - INFO - PARAMETER ...
+2023-11-25 15:45:55,906 - Model - INFO - Namespace(model='pointnet_sem_seg', batch_size=16, epoch=32, learning_rate=0.001, gpu='0', optimizer='Adam', log_dir='2023_seed', decay_rate=0.0001, npoint=4096, step_size=10, lr_decay=0.7, test_area=5)
+2023-11-25 15:46:43,987 - Model - INFO - The number of training data is: 28666
+2023-11-25 15:46:44,007 - Model - INFO - The number of test data is: 4509
+2023-11-25 15:46:44,216 - Model - INFO - No existing model, starting training from scratch...
+2023-11-25 15:46:44,218 - Model - INFO - **** Epoch 1 (1/32) ****
+2023-11-25 15:46:44,218 - Model - INFO - Learning rate:0.001000
