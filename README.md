@@ -1,10 +1,9 @@
 # POISE
 
-**POISE** (Plant Online Interactive Stereo model development Environment), an online platform for 3D visualization and interactive investigation of plant architecture and organ morphology with the embedded support of multilevel segmentation information.
-
+POISE (Plant Online Interactive Stereo model development Environment), comprises three components: an online platform for 3D visualization and interactive investigation of plant architecture and organ morphology; OSTRA for modelling plants in the original growth state and segmenting organs ( [OSTRA](https://github.com/ganlab/OSTRA) is available independently ); ScaleCalculator for recovering physical scales of 3D models.
 
 ## :computer:Getting Started
-### Access Address
+### Online database
 https://bic.njau.edu.cn/poise.html
 ### Local Deployment
 The web deployment was tested on IIS, Apache, and nginx, while browser testing was conducted on Chrome, Edge, and Safari.
