@@ -30,29 +30,35 @@ python ScaleCalculator/with_depth/main.py
 We have provided a sample for you to test in ScaleCalculator/with_depth/sample.
 
 ### with object anchor
-The training and prediction process is completed using [pointnet++](https://github.com/yanx27/Pointnet_Pointnet2_pytorch)
+You can run the script to perform object anchor-based scale estimation. 
 
-#### predicted object anchor point cloud.
-```shell
-python data_process/prediction/prediction_result.py
-```
-The results are in ScaleCalculator/with_objectanchor/log/sem_seg/2023_seed/visual. 
+<details>
+  <summary>Click to expand for more details</summary>
 
-#### Estimation real-scale.
-
-This process may involve converting .ply files to .obj files.
-```shell
-python data_process/prediction/plyobj2.py
-```
-Then,
-```shell
-python data_process/prediction/txt2scale.py
-```
-
-#### background segmentation.
-```shell
-python data_process/prediction/seg_glb.py
-```
+  The training and prediction process is completed using [pointnet++](https://github.com/yanx27/Pointnet_Pointnet2_pytorch)
+  
+  #### predicted object anchor point cloud.
+  ```shell
+  python data_process/prediction/prediction_result.py
+  ```
+  The results are in ScaleCalculator/with_objectanchor/log/sem_seg/2023_seed/visual. 
+  
+  #### Estimation real-scale.
+  
+  This process may involve converting .ply files to .obj files.
+  ```shell
+  python data_process/prediction/plyobj2.py
+  ```
+  Then,
+  ```shell
+  python data_process/prediction/txt2scale.py
+  ```
+  
+  #### background segmentation.
+  ```shell
+  python data_process/prediction/seg_glb.py
+  ```
+</details>
 
 We have provided a sample for you to test in ScaleCalculator/with_objectanchor/test.
 
