@@ -10,7 +10,7 @@ def load_mesh(mesh_path):
         mesh = o3d.io.read_triangle_mesh(mesh_path)
         mesh.compute_vertex_normals()
         voxel_size = 0.01
-        point_cloud = mesh.sample_points_poisson_disk(number_of_points=5000)  # 使用泊松磁盘采样
+        point_cloud = mesh.sample_points_poisson_disk(number_of_points=5000)
         points = np.asarray(point_cloud.points)
         return mesh, point_cloud, points
     except Exception as e:
