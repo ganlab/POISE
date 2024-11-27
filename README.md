@@ -71,7 +71,7 @@ Please considering cite our paper if you find this work useful!
 
 ## License
 Free for non-profit research purposes. Please contact authors otherwise. The program itself may not be modified in any way and no redistribution is allowed.
-No condition is made or to be implied, nor is any warranty given or to be implied, as to the accuracy of POISE, or that it will be suitable for any particular purpose or for use under any specific conditions, or that the content or use of PROPA will not constitute or result in infringement of third-party rights.
+No condition is made or to be implied, nor is any warranty given or to be implied, as to the accuracy of POISE, or that it will be suitable for any particular purpose or for use under any specific conditions, or that the content or use of POISE will not constitute or result in infringement of third-party rights.
 
 ## :clap: Acknowledgements
 Website is based on [three.js](https://github.com/mrdoob/three.js) and [3DView.Measurements](https://github.com/AwesomeTeamOne/3DView.Measurements). ScaleCalculator is based on [Open3D](https://github.com/isl-org/Open3D) and [pointnet++](https://github.com/yanx27/Pointnet_Pointnet2_pytorch). The software is developed by following author(s) and supervised by Prof. Xiangchao Gan(gan@njau.edu.cn).
