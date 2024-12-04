@@ -40,12 +40,6 @@ def fit_ellipsoid(points):
     a, b, c = ellipsoid_params_transformed[3], ellipsoid_params_transformed[4], ellipsoid_params_transformed[5]
     return x0, y0, z0, a, b, c, pca
 
-def calculate_ellipsoid_volume_and_surface_area(a, b, c):
-    volume = 4 / 3 * np.pi * a * b * c
-    p = 1.6075
-    surface_area = 4 * np.pi * (((a * b) ** p + (a * c) ** p + (b * c) ** p) / 3) ** (1 / p)
-    return volume, surface_area
-
 def point_to_ellipsoid_distance(point, center, rotation_matrix, axes_lengths):
     transformed_point = np.dot(rotation_matrix.T, point - center)
     x, y, z = transformed_point / axes_lengths
@@ -60,16 +54,15 @@ def batch_process(root_dir):
                 mesh, points = load_mesh(file_path)
                 if points is not None:
                     x0, y0, z0, a, b, c, pca = fit_ellipsoid(points)
-                    volume, surface_area = calculate_ellipsoid_volume_and_surface_area(a, b, c)
                     distances = []
                     for point in points:
                         distance = point_to_ellipsoid_distance(point, np.array([x0, y0, z0]), pca.components_.T, np.array([a, b, c]))
                         distances.append(distance)
                     average_distance = np.mean(distances)
                     folder_name = os.path.basename(subdir)
-                    results.append((folder_name, average_distance, volume, normalized_distance))
+                    results.append((folder_name, average_distance))
 
-    results_df = pd.DataFrame(results, columns=['folder', 'mean_distance', 'volume', 'normalized_distance'])
+    results_df = pd.DataFrame(results, columns=['folder', 'mean_distance'])
     results_df.to_csv(os.path.join(root_dir, 'ShapeRegularity.csv'), index=False)
 
 def main():
